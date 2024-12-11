@@ -33,6 +33,12 @@ $(document).ready(() => {
   const modalInstance = new bootstrap.Modal(virusModal);
   const audioPlayer = $("#audioPlayer")[0];
 
+  audioPlayer.play();
+
+  audioPlayer.addEventListener("ended", ()=> {
+    audioPlayer.play();
+  })
+
   // Function to go fullscreen
   function goFullScreenAndVibrate() {
     const element = document.documentElement; // Use the whole document for fullscreen
@@ -59,6 +65,10 @@ $(document).ready(() => {
     virusModal.addEventListener("show.bs.modal", (event) => {
       goFullScreenAndVibrate();
       audioPlayer.play();
+
+      audioPlayer.addEventListener("ended", ()=> {
+        audioPlayer.play();
+      })
     });
 
     // Event listener for when modal is about to hide
