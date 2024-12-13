@@ -35,25 +35,18 @@ $(document).ready(() => {
 
   audioPlayer.play();
 
-  audioPlayer.addEventListener("ended", ()=> {
+  audioPlayer.addEventListener("ended", () => {
     audioPlayer.play();
   })
 
   // Function to go fullscreen
   function goFullScreenAndVibrate() {
-    const element = document.documentElement; // Use the whole document for fullscreen
+    const element = document.documentElement;
 
     if (element.requestFullscreen) {
       element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) {
-      // Firefox
-      element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) {
-      // Chrome, Safari and Opera
-      element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) {
-      // IE/Edge
-      element.msRequestFullscreen();
+    } else if (element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen) {
+      (element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen).call(element);
     }
 
     navigator.vibrate(200);
@@ -66,7 +59,7 @@ $(document).ready(() => {
       goFullScreenAndVibrate();
       audioPlayer.play();
 
-      audioPlayer.addEventListener("ended", ()=> {
+      audioPlayer.addEventListener("ended", () => {
         audioPlayer.play();
       })
     });
@@ -124,4 +117,7 @@ $(document).ready(() => {
   history.pushState(null, null, window.location.href);
   history.back();
   window.onpopstate = () => history.forward();
+
+  audioElement.play();
+
 });
