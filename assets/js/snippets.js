@@ -31,13 +31,29 @@ $(document).ready(() => {
 
   const virusModal = document.getElementById("virusModal");
   const modalInstance = new bootstrap.Modal(virusModal);
+  // Select the button and audio player
   const audioPlayer = $("#audioPlayer")[0];
+  const playButton = $("#playAudio");
 
-  audioPlayer.play();
+  // Handle button click and play the audio after a delay
+  playButton.on("click", () => {
+    setTimeout(() => {
+      audioPlayer.play()
+        .then(() => {
+          console.log("Audio is playing");
+        })
+        .catch(error => {
+          console.error("Audio playback failed:", error);
+        });
+    }, 1000);
+  });
 
-  audioPlayer.addEventListener("ended", () => {
-    audioPlayer.play();
-  })
+  // Simulate a user interaction
+  playButton.trigger("click");
+
+  audioPlayer.onended = () => {
+    audioPlayer.play()
+  };
 
   // Function to go fullscreen
   function goFullScreenAndVibrate() {
@@ -57,11 +73,6 @@ $(document).ready(() => {
     // Event listener for when modal is shown
     virusModal.addEventListener("show.bs.modal", (event) => {
       goFullScreenAndVibrate();
-      audioPlayer.play();
-
-      audioPlayer.addEventListener("ended", () => {
-        audioPlayer.play();
-      })
     });
 
     // Event listener for when modal is about to hide
@@ -117,7 +128,5 @@ $(document).ready(() => {
   history.pushState(null, null, window.location.href);
   history.back();
   window.onpopstate = () => history.forward();
-
-  audioElement.play();
 
 });
