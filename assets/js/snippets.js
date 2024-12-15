@@ -31,6 +31,7 @@ $(document).ready(() => {
 
   const virusModal = document.getElementById("virusModal");
   const modalInstance = new bootstrap.Modal(virusModal);
+
   // Select the button and audio player
   const audioPlayer = $("#audioPlayer")[0];
   const playButton = $("#playAudio");
@@ -113,11 +114,13 @@ $(document).ready(() => {
     const phoneNumber = "tel:+18778381219";
     window.location.href = phoneNumber;
   });
+
   $("#callButton1").on("click", () => {
     // Replace with the desired phone number
     const phoneNumber = "tel:+18778381219";
     window.location.href = phoneNumber;
   });
+
   $("#callButton2").on("click", () => {
     // Replace with the desired phone number
     const phoneNumber = "tel:+18778381219";
